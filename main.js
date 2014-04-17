@@ -42,16 +42,16 @@ function sendHandshake() {
   		}]
 	}
 
-	/* {"Request_type":1,"minPlayers":1,"maxPlayers":10,"Buttons":{"Width":3,"Height":2,"5":{"Title":"SHOOT","X":0,"Y":0},"6":{"Title":"BOOST","X":2,"Y":0},"7":{"Title":"BREAK","X":2,"Y":1}},"Media":[{"Path":"/Users/denisogun/Documents/Year 3/Games Project/Game/Client/Assets/Media/Images/blue.png","Type":0},{"Path":"/Users/denisogun/Documents/Year 3/Games Project/Game/Client/Assets/Media/Images/red.png","Type":0},{"Path":"/Users/denisogun/Documents/Year 3/Games Project/Game/Client/Assets/Media/Images/green.png","Type":0},{"Path":"/Users/denisogun/Documents/Year 3/Games Project/Game/Client/Assets/Media/Images/magenta.png","Type":0}]} */
-
 	var json = JSON.stringify(handshake);
 	console.log(json);
 	buffer = str2ab(json);
 
-	chrome.sockets.tcp.send(socketId, buffer, function(info) {
-		if (info.resultCode != 0) {
-      		console.log("Send failed.");
-		}
+	string2ArrayBuffer(json, function(buf) {
+		chrome.sockets.tcp.send(socketId, buf, function(info) {
+			if (info.resultCode != 0) {
+      			console.log("Send failed.");
+			}
+		});
 	});
 }
 
@@ -63,6 +63,14 @@ chrome.sockets.tcp.onReceive.addListener(function(info) {
   	console.log(info.data);
 });
 
+function string2ArrayBuffer(string, callback) {
+    var blob = new Blob([string]);
+    var f = new FileReader();
+    f.onload = function(e) {
+        callback(e.target.result);
+    }
+    f.readAsArrayBuffer(blob);
+}
 
 
 function ab2str(buf) {
