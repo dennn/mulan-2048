@@ -44,7 +44,6 @@ function sendHandshake() {
 
 	var json = JSON.stringify(handshake);
 	console.log(json);
-	buffer = str2ab(json);
 
 	string2ArrayBuffer(json, function(buf) {
 		chrome.sockets.tcp.send(socketId, buf, function(info) {
@@ -63,6 +62,8 @@ chrome.sockets.tcp.onReceive.addListener(function(info) {
   	console.log(info.data);
 });
 
+/* Turn the JSON strings into an array buffer. Chrome sockets require the data to be in this format to send */
+
 function string2ArrayBuffer(string, callback) {
     var blob = new Blob([string]);
     var f = new FileReader();
@@ -72,17 +73,11 @@ function string2ArrayBuffer(string, callback) {
     f.readAsArrayBuffer(blob);
 }
 
-
-function ab2str(buf) {
-	return String.fromCharCode.apply(null, new Uint16Array(buf));
-}
-    
-function str2ab(str) {
-    var buf = new ArrayBuffer(str.length*2); // 2 bytes for each char
-    var bufView = new Uint16Array(buf);
-    for (var i=0, strLen=str.length; i<strLen; i++) {
-    	bufView[i] = str.charCodeAt(i);
+function arrayBuffer2String(buf, callback) {
+    var blob = new Blob([buf]);
+    var f = new FileReader();
+    f.onload = function(e) {
+        callback(e.target.result)
     }
-    
-    return buf;
+    f.readAsText(blob);
 }
