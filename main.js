@@ -92,10 +92,8 @@ function sendHandshake() {
 				"X": 2,
 				"Y": 0
 			}
-
 		},
-		Media: [{
-		}]
+		Media: []
 	};
 
 	var json = JSON.stringify(handshake);

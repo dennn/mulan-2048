@@ -56,6 +56,9 @@ GameManager.prototype.setup = function () {
 
   // Update the actuator
   this.actuate();
+
+  // Launch in fullscreen
+  chrome.app.window.current().fullscreen();
 };
 
 // Set up the initial tiles to start the game with

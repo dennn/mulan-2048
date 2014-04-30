@@ -13,5 +13,9 @@
     	"background": {
      	 "scripts": ["background.js"]
     	}
- 	}
+ 	},
+ 	"permissions" : [
+ 		"fullscreen"
+ 	]
+
 }
