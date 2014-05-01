@@ -11,6 +11,9 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
   this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
 
   this.setup();
+
+  // Launch in fullscreen
+  chrome.app.window.current().fullscreen();
 }
 
 // Restart the game
@@ -56,9 +59,6 @@ GameManager.prototype.setup = function () {
 
   // Update the actuator
   this.actuate();
-
-  // Launch in fullscreen
-  chrome.app.window.current().fullscreen();
 };
 
 // Set up the initial tiles to start the game with

@@ -88,7 +88,7 @@ KeyboardInputManager.prototype.listen = function () {
         break;
 
       case action.restart:
-        this.restart();
+        self.restart.call(self, event);
         break;
     }
   });
@@ -163,7 +163,7 @@ KeyboardInputManager.prototype.keepPlaying = function (event) {
 };
 
 KeyboardInputManager.prototype.bindButtonPress = function (selector, fn) {
-  var button = document.querySelector(selector);
+/*  var button = document.querySelector(selector);
   button.addEventListener("click", fn.bind(this));
-  button.addEventListener(this.eventTouchend, fn.bind(this));
+  button.addEventListener(this.eventTouchend, fn.bind(this));*/
 };

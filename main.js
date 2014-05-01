@@ -167,7 +167,6 @@ function handleGameDataResponse(JSON)
 								break;
 						}
 
-						console.log(gesture);
 						var event = new CustomEvent('mulan-gesture', { 'detail': gesture }); 
 						document.dispatchEvent(event);
 					}
