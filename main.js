@@ -65,17 +65,17 @@ function sendHandshake() {
 		maxPlayers: 1,
 		minPlayers: 1,
 		Buttons: {
-			Width: 3,
-			Height: 2, 
+			Width: 5,
+			Height: 4, 
 			4: {
 				"Title": "Up",
-				"X": 0,
+				"X": 1,
 				"Y": 0
 			},
 			5: {
 				"Title": "Down",
 				"X": 1,
-				"Y": 0
+				"Y": 2
 			},
 			6: {
 				"Title": "Left",
@@ -84,12 +84,12 @@ function sendHandshake() {
 			},
 			7: {
 				"Title": "Right",
-				"X": 1,
+				"X": 2,
 				"Y": 1
 			},
 			8: {
 				"Title": "Restart",
-				"X": 2,
+				"X": 4,
 				"Y": 0
 			}
 		},
