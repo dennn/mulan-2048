@@ -173,6 +173,12 @@ function handleGameDataResponse(JSON)
 				}
 			}
 		}
+		var shouldKill = players[0].GameKill;
+		if (shouldKill != null) {
+			if (shouldKill) {
+				window.close();
+			}
+		}
 	}
 	setTimeout(sendGameData, 25);
 }
