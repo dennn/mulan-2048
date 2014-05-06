@@ -66,7 +66,7 @@ function sendHandshake() {
 		minPlayers: 1,
 		Buttons: {
 			Width: 5,
-			Height: 4, 
+			Height: 3, 
 			4: {
 				"Title": "Up",
 				"X": 1,
@@ -144,7 +144,7 @@ function handleGameDataResponse(JSON)
 				if (playersDevices.hasOwnProperty(key)) {
 					if (playersDevices[key].Status == 1) {
 						var gesture;
-						console.log("button press")
+						console.log("button press");
 						switch (key) {
 							case "4":
 								gesture = action.up;
@@ -173,13 +173,16 @@ function handleGameDataResponse(JSON)
 				}
 			}
 		}
-		var shouldKill = players[0].GameKill;
-		if (shouldKill != null) {
-			if (shouldKill) {
-				window.close();
-			}
+	}
+
+	var shouldKill = JSON.GameKill;
+	if (shouldKill != null) {
+		console.log("Got kill");
+		if (shouldKill) {
+			window.close();
 		}
 	}
+
 	setTimeout(sendGameData, 25);
 }
 
