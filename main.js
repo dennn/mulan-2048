@@ -179,6 +179,7 @@ function handleGameDataResponse(JSON)
 	if (shouldKill != null) {
 		console.log("Got kill");
 		if (shouldKill) {
+			chrome.sockets.tcp.close(socketId, null);
 			window.close();
 		}
 	}
