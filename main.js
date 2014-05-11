@@ -16,7 +16,7 @@ var buttonState = {
 var action = {
 	up : 0,
 	down: 1,
-	left: 2, 
+	left: 2,
 	right: 3,
 	restart: 4
 }
@@ -63,11 +63,11 @@ chrome.sockets.tcp.onReceive.addListener(function(info) {
 function sendHandshake() {
 	var handshake = {
 		Request_type: requestType.Handshake,
-		maxPlayers: 1,
-		minPlayers: 1,
+		Max_players: 1,
+		Min_players: 1,
 		Buttons: {
 			Width: 5,
-			Height: 3, 
+			Height: 3,
 			4: {
 				"Title": "Up",
 				"X": 1,
@@ -168,7 +168,7 @@ function handleGameDataResponse(JSON)
 								break;
 						}
 
-						var event = new CustomEvent('mulan-gesture', { 'detail': gesture }); 
+						var event = new CustomEvent('mulan-gesture', { 'detail': gesture });
 						document.dispatchEvent(event);
 
 						//shouldAction = false;
