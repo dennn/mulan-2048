@@ -15,7 +15,8 @@
     	}
  	},
  	"permissions" : [
- 		"fullscreen"
+ 		"fullscreen",
+    "storage"
  	]
 
 }
