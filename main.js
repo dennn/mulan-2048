@@ -29,6 +29,7 @@ for (i = 4; i < 9; i++) {
 var socketId;
 var numberOfPlayers = 0;
 var handshaken = false;
+var shouldAction = true;
 
 chrome.sockets.tcp.create({}, function(createInfo) {
 	socketId = createInfo.socketId;
@@ -142,7 +143,7 @@ function handleGameDataResponse(JSON)
 {
 	var players = JSON.Player_inputs;
 
-	if (players[0] != null) {
+	if (players[0] != null && shouldAction == true) {
 		var playersDevices = players[0].Devices;
 		if (playersDevices != null) {
 			for (var key in playersDevices) {
@@ -174,6 +175,8 @@ function handleGameDataResponse(JSON)
 
 						var event = new CustomEvent('mulan-gesture', { 'detail': gesture });
 						document.dispatchEvent(event);
+
+						//shouldAction = false;
 					}
 					prevStatus[key] = playersDevices[key].Status;
 				}
@@ -190,7 +193,12 @@ function handleGameDataResponse(JSON)
 		}
 	}
 
-	setTimeout(sendGameData, 25);
+	sendGameData();
+}
+
+function allowAction()
+{
+	shouldAction = true;
 }
 
 /* Turn the JSON strings into an array buffer. Chrome sockets require the data to be in this format to send */
