@@ -19,6 +19,11 @@ var action = {
 	left: 2,
 	right: 3,
 	restart: 4
+};
+
+var prevStatus = [];
+for (i = 4; i < 9; i++) {
+	prevStatus[i] = 0;
 }
 
 var socketId;
@@ -68,22 +73,22 @@ function sendHandshake() {
 			Width: 5,
 			Height: 3,
 			4: {
-				"Title": "Up",
+				"Title": "↑",
 				"X": 1,
 				"Y": 0
 			},
 			5: {
-				"Title": "Down",
+				"Title": "↓",
 				"X": 1,
 				"Y": 2
 			},
 			6: {
-				"Title": "Left",
+				"Title": "←",
 				"X": 0,
 				"Y": 1
 			},
 			7: {
-				"Title": "Right",
+				"Title": "→",
 				"X": 2,
 				"Y": 1
 			},
@@ -142,7 +147,7 @@ function handleGameDataResponse(JSON)
 		if (playersDevices != null) {
 			for (var key in playersDevices) {
 				if (playersDevices.hasOwnProperty(key)) {
-					if (playersDevices[key].Status == 1) {
+					if (playersDevices[key].Status == 1 && prevStatus[key] == 0) {
 						var gesture;
 						console.log("button press");
 						switch (key) {
@@ -170,6 +175,7 @@ function handleGameDataResponse(JSON)
 						var event = new CustomEvent('mulan-gesture', { 'detail': gesture });
 						document.dispatchEvent(event);
 					}
+					prevStatus[key] = playersDevices[key].Status;
 				}
 			}
 		}
